@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     libzip-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd zip pdo pdo_mysql
+    && docker-php-ext-install gd zip pdo pdo_mysql mysqli
 
 # Activation de mod_rewrite pour Apache (utile pour les URL conviviales)
 RUN a2enmod rewrite
