@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS vehicules (
     id INT AUTO_INCREMENT PRIMARY KEY,
     marque VARCHAR(50) NOT NULL,
     modele VARCHAR(50) NOT NULL,
-    immatriculation VARCHAR(50) NOT NULL,
+    immatriculation VARCHAR(50) NOT NULL UNIQUE,
     annee INT,
     client_id INT,
     FOREIGN KEY (client_id) REFERENCES clients(id)

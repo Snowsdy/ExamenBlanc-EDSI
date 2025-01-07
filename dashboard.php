@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+if (!isset($_SESSION['token'])) {
+    header("Location: index.php");
+}
+
 require_once('database/db.php');
 $conn = connectDB();
 
@@ -19,11 +23,13 @@ $totalRendezvous = $row['total_rendezvous'];
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tableau de Bord Garage Train</title>
 </head>
+
 <body>
     <h1>Tableau de Bord Garage Train</h1>
     <div>
@@ -39,4 +45,5 @@ $totalRendezvous = $row['total_rendezvous'];
         <p>Total Rendez-vous: <?= $totalRendezvous ?></p>
     </div>
 </body>
+
 </html>
