@@ -52,8 +52,8 @@ CREATE TABLE IF NOT EXISTS tokens (
 
 -- Insertion des administrateurs
 INSERT INTO administrateurs (username, password_hash) VALUES
-('admin1', '$2y$10$TOBO0ipevsQEWJ7oME7iEegjPT7s3HL9K5PJB.qIiXwj1ED2ZhvTi'),
-('admin2', '$2y$10$TOBO0ipevsQEWJ7oME7iEegjPT7s3HL9K5PJB.qIiXwj1ED2ZhvTi');
+('admin1', '$2y$10$AbaxLJqc3ykF8FO7r9pfwe68xoLjsNJNCyNrh97IkAO/5aSbhJOx6'),
+('admin2', '$2y$10$AbaxLJqc3ykF8FO7r9pfwe68xoLjsNJNCyNrh97IkAO/5aSbhJOx6');
 
 -- Insertion des clients
 INSERT INTO clients (nom, email, telephone) VALUES

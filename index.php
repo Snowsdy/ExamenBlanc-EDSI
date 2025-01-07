@@ -6,6 +6,7 @@ require_once('security/connexion.php');
 if (isTokenValid($_SESSION['token'])) {
     header("Location: /dashboard.php");
 }
+
 $error = false;
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
