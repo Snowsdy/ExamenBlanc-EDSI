@@ -1,0 +1,52 @@
+services:
+  # Service MySQL
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-container
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1 # Pas de mot de passe pour l'utilisateur root
+      MYSQL_DATABASE: mydatabase # Nom de la base de données à créer
+    volumes:
+      - mysql-data:/var/lib/mysql # Persistance des données MySQL
+    networks:
+      - mynetwork
+    expose:
+      - "3306:3306" # MySQL sera accessible uniquement sur le réseau interne
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 30s
+      retries: 3
+
+  # Service PHP (votre site web)
+  php:
+    build: .
+    container_name: php-container
+    ports:
+      - "8080:80" # Port d'accès à votre site web PHP
+    networks:
+      - mynetwork
+    depends_on:
+      - mysql # Attendre que MySQL soit prêt avant de démarrer PHP
+
+  # Service PHPMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin-container
+    environment:
+      PMA_HOST: mysql # Le service MySQL auquel se connecter
+      PMA_USER: root # Utilisateur root
+      PMA_PASSWORD: "" # Pas de mot de passe pour root
+    ports:
+      - "8081:80" # PHPMyAdmin sera accessible sur le port 8081
+    networks:
+      - mynetwork
+    depends_on:
+      - mysql # Attendre que MySQL soit prêt avant de démarrer PHPMyAdmin
+
+networks:
+  mynetwork:
+    driver: bridge
+
+volumes:
+  mysql-data:
+    driver: local

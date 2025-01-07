@@ -2,12 +2,14 @@
 
 require_once('database/db.php');
 
-function generateToken() {
+function generateToken()
+{
     return bin2hex(random_bytes(32));
 }
 
-function loginWithToken($username, $password) {
-  $conn = connectDB();
+function loginWithToken($username, $password)
+{
+    $conn = connectDB();
     $query = "SELECT id, username, password_hash FROM administrateurs WHERE username = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("s", $username);
@@ -33,8 +35,9 @@ function loginWithToken($username, $password) {
     return false;
 }
 
-function isTokenInDatabase($token) {
-  $conn = connectDB();
+function isTokenInDatabase($token)
+{
+    $conn = connectDB();
 
     $query = "SELECT COUNT(*) AS token_count FROM tokens WHERE token = ? AND expiration_date > NOW()";
     $stmt = $conn->prepare($query);
@@ -50,11 +53,12 @@ function isTokenInDatabase($token) {
     }
     return false;
 }
-function isTokenValid($token) {
-    if(isset($token) && !empty($token)){
+
+function isTokenValid($token)
+{
+    if (isset($token) && !empty($token)) {
         return isTokenInDatabase($token);
-    }
-    else{
+    } else {
         return false;
     }
 }

@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS vehicules (
     id INT AUTO_INCREMENT PRIMARY KEY,
     marque VARCHAR(50) NOT NULL,
     modele VARCHAR(50) NOT NULL,
+    immatriculation VARCHAR(50) NOT NULL,
     annee INT,
     client_id INT,
     FOREIGN KEY (client_id) REFERENCES clients(id)
@@ -45,10 +46,10 @@ INSERT INTO clients (nom, email, telephone) VALUES
 ('Jane Smith', 'jane.smith@email.com', '987654321'),
 ('Bob Johnson', 'bob.johnson@email.com', '555555555');
 
-INSERT INTO vehicules (marque, modele, annee, client_id) VALUES
-('Toyota', 'Camry', 2015, 1),
-('Honda', 'Civic', 2020, 2),
-('Ford', 'Focus', 2018, 3);
+INSERT INTO vehicules (marque, modele, immatriculation, annee, client_id) VALUES
+('Toyota', 'Camry', 'ED-480-XQ', 2015, 1),
+('Honda', 'Civic', 'TP-012-VK', 2020, 2),
+('Ford', 'Focus', 'FO-001-GG', 2018, 3);
 
 
 INSERT INTO rendezvous (date_heure, vehicule_id, description) VALUES
