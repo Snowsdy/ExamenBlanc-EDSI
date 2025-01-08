@@ -12,7 +12,7 @@ services:
     networks:
       - mynetwork
     expose:
-      - "3306:3306" # MySQL sera accessible uniquement sur le réseau interne
+      - "3306" # MySQL sera accessible uniquement sur le réseau interne
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 30s
@@ -23,7 +23,7 @@ services:
     build: .
     container_name: php-container
     ports:
-      - "80:80" # Port d'accès à votre site web PHP
+      - "80" # Port d'accès à votre site web PHP
     restart: always
     networks:
       - mynetwork
@@ -49,11 +49,11 @@ services:
     image: ngrok/ngrok:latest
     command:
       - "http"
-      - "http://host.docker.internal:80"
+      - "http://php:80"
     environment:
       NGROK_AUTHTOKEN: ${NGROK_AUTHTOKEN}
     ports:
-      - 4040:4040
+      - 80:4040
     networks:
       - mynetwork
 
