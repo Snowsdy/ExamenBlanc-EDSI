@@ -23,7 +23,8 @@ services:
     build: .
     container_name: php-container
     ports:
-      - "8080:80" # Port d'accès à votre site web PHP
+      - "80:80" # Port d'accès à votre site web PHP
+    restart: always
     networks:
       - mynetwork
     depends_on:
@@ -43,6 +44,18 @@ services:
       - mynetwork
     depends_on:
       - mysql # Attendre que MySQL soit prêt avant de démarrer PHPMyAdmin
+
+  ngrok:
+    image: ngrok/ngrok:latest
+    command:
+      - "http"
+      - "http://host.docker.internal:80"
+    environment:
+      NGROK_AUTHTOKEN: ${NGROK_AUTHTOKEN}
+    ports:
+      - 4040:4040
+    networks:
+      - mynetwork
 
 networks:
   mynetwork:

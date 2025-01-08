@@ -1,3 +1,4 @@
 import.sql
 Dockerfile
 docker-compose.yml
+.env
